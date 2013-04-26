@@ -1,0 +1,379 @@
+\documentclass{article}
+
+%IDIOMA
+\usepackage[spanish]{babel}
+\usepackage[latin1]{inputenc}  % Ambos para solucin de asuntos de idioma
+\usepackage[T1]{fontenc}
+
+%MATH
+\usepackage{amsmath,amssymb,mathrsfs,mathptmx}  % Matemticas varias
+\usepackage{hyperref} % Para escribir URLs
+\usepackage[]{algorithm2e}
+\usepackage{verbatim}
+
+%IMAGES
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+\usepackage[usenames,dvipsnames]{color}
+\graphicspath{{../latex/}}
+\DeclareGraphicsExtensions{.png,.jpg,.pdf,.mps,.gif,.bmp, .eps}
+\usepackage{caption}
+
+%VARIOS
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{tabulary}
+\usepackage[table]{xcolor}
+\usepackage{color}
+\usepackage{listings}
+
+\usepackage{tikz}
+
+
+\begin{document}
+
+\title{\Huge HPPS \\ \huge Informe 1 - Optmización FIR}
+
+\author{ Juan Braun}
+\maketitle
+
+%\include{intro}
+\section*{Introducción}
+% v5.0: corregida por el tribunal.
+
+
+El objetivo de este informe es estudiar diferentes implementaciones de un filtro FIR analizando ventajas y desventajas. 
+Luego se elije una implementación particular y se estudian diferentes maneras para optimizarla. Finalmente se presenta el filtro FIR optimizado. 
+
+\section{FIR: versión 1}
+Esta implementación asume que se conoce la se\~nal de entrada antes de realizar el filtrado. Para realizar esta implementación se modificó la interfaz de la funcion \verb|fir_NC|, se pasa como parámetro un puntero a una muestra:
+\begin{verbatim}
+sample_t fir_NC(sample_t* muestra);
+\end{verbatim}  
+De esta manera se puede calcular la muestra de salida de la siguiente manera:
+\begin{verbatim}
+for(i = 0; i<TAP_LENGTH; i++)
+   out+=coefsLocalesNC[i] * *(muestra-i);
+\end{verbatim}
+
+Se puede ver que para calcular cada muestra de salida se realizan \verb|TAP_LENGTH| sumas, para calcular el índice de la muestra de entrada, \verb|TAP_LENGTH| multiplicaciones y \verb|TAP_LENGTH| sumas. Ademas se realizan  $2 \cdot\verb|TAP_LENGTH|$ accesos a memoria. 
+Si se le da el mismo costo a todas las operaciones se tiene un total de $5 \cdot\verb|TAP_LENGTH|$ operaciones por muestra.
+ 
+La ventaja de esta versión es que es fácil de implementar y es la que realiza la menor cantidad de operaciones. La desventaja es que no puede ser utilizada para trabajar en tiempo real y se necesita memoria para almacenar toda la se\~al de entrada. 
+ 
+Para las pruebas se utilizaron diferentes combinaciones $(\verb|SIGNAL_LENGTH|,\verb|TAP_LENGTH|)$. 
+ 
+\begin{table}[h!]
+\centering
+\begin{tabular}{| c | l |}
+\hline% inserts single horizontal line
+A & $(10,4)$\\ \hline
+B & $(1024,128)$ \\ \hline
+C & $(44100,1024)$\\ \hline
+\end{tabular}
+\caption{Combinaciones }
+\label{table:comb}
+\end{table}
+
+
+ 
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|float| & \verb|double|\\[0.5ex]
+\hline
+A & 27025 & 25767\\ \hline
+B & 3723250 & 3749336\\ \hline
+C & 1340053072 & 1340053456\\ \hline
+
+\end{tabular}
+\caption{Ciclos de reloj}
+\label{table:costoFijo}
+\end{table}
+
+En la Tabla \ref{table:costoFijo} se ven los ciclos de reloj del procesador que se necesitaron para correr esta implementación para las diferentes se\~nales de entrada.
+
+ \begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline 
+ & \verb|float| & \verb|double|\\[0.5ex]
+\hline
+A & 1.01\% & 0.96\%\\ \hline
+B & 57.85\% & 58.25\%\\ \hline
+C & 99.69\% & 99.69\%\\ \hline
+\end{tabular}
+\caption{Tiempo relativo}
+\label{table:costoVar}
+\end{table}
+En la Tabla \ref{table:costoVar} se puede ver el tiempo relativo en cada caso. Cuando se tiene una se\~nal peque\~na, el tiempo de procesamiento de es mucho menor al tiempo que se utiliza en el programa para ejecutar otras funciones que se utilizan siempre que se ejecuta un programa. Estas funciones representan el costo fijo de la ejecución. Mientras más chica la se\~nal, el costo de procesamiento es comparable al costo fijo, por lo tanto el tiempo de procesamiento es comparable con el tiempo que lleva ejecutar las funciones correspondientes al costo fijo. 
+ 
+Otro parámetro utilizado para estudiar el funcionamiento de la implementación es $\verb|#ciclos| / \verb|SIGNAL_LENGTH| / \verb|TAP_LENGTH|$. Este valor da una idea de la eficiencia de la implementación. Estos valores se pueden ver en la Tabla \ref{table:eficiencia}
+ 
+ \begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|float| & \verb|double|\\[0.5ex]
+\hline
+A & 675.6 & 644.2\\ \hline
+B & 28.4 & 28.6\\ \hline
+C & 29.7 & 29.7\\ \hline
+
+\end{tabular}
+\caption{Eficiencia}
+\label{table:eficiencia}
+\end{table}
+ 
+En todas las medidas anteriores se discriminaron los casos en los que se usan datos tipo \verb|float| y tipo \verb|double|. Se puede ver que los resultados son similares. Esto se debe a que el procesador es de 64 bits, tiene el mismo costo realizar operaciones con \verb|float|(32 bits) que con \verb|double|(64 bits). De aqui en más se presentas resultados para tipo de dato \verb|double|.
+
+ \section{FIR: versión 2}
+ 
+Esta versión procesa las muestras de entrada a medida que le llegan al filtro. Puede ser utilizada para procesamiento en tiempo real. Se llena un buffer a medida que llegan muestras nuevas y se calcula la se\~nal de salida. Cuando el buffer se llena y entra una nueva muestra, se desplazan todas las muestras en el buffer haciendo lugar para la nueva muestra. 
+El buffer se controla de la siguiente manera:
+\begin{verbatim}
+for(i = TAP_LENGTH-1; i>0; i--)
+   buffer[i]=buffer[i-1];
+buffer[0]=muestra;
+\end{verbatim}
+La muestra de salida se calcula de la siguiente manera:
+\begin{verbatim}
+for(i = 0; i<TAP_LENGTH; i++)
+   out+=coefsLocales[i] * buffer[i];
+\end{verbatim}
+
+En esta versión se tiene $5 \cdot\verb|TAP_LENGTH|$ manipulaciones de memoria para el buffer,  para el caculo de la salida se tienen $2 \cdot\verb|TAP_LENGTH|$ accesos a memoria, \verb|TAP_LENGTH| multiplicaciones y \verb|TAP_LENGTH| sumas. 
+Se tienen $9 \cdot\verb|TAP_LENGTH|$.
+
+Esta versión es fácil de implementar, usa menos memoria que la versión anterior ya que solo se necesitan \verb|TAP_LENGTH| valores para el buffer y una sola muestra de entrada. 
+
+Los resultados obtenidos fueron los siguientes:
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+ & \verb|Ciclos de reloj| & \verb|Tiempo relativo| & \verb|Eficiencia| \\[0.5ex]
+\hline
+A & 27727  & 1.04\% & 693.2 \\ \hline
+B & 6321319 & 70.18\% & 48.2\\ \hline
+C & 2167805367 & 99.82\% & 48.0\\ \hline
+\end{tabular}
+\caption{Resultados FIRv2}
+\label{table:firv2}
+\end{table}
+
+Como se mencionó anteriormente esta versión requiere $9 \cdot\verb|TAP_LENGTH|$ operaciones mientras que la anterior requiere $5 \cdot\verb|TAP_LENGTH|$, se puede ver que la relación entre los ciclos de reloj de las diferentes versiones cumplen esta relación:
+$$ \frac{6321319}{3723250} \cong 1.7 $$
+$$ \frac{2167805367}{1340053072} \cong 1.6 $$
+$$ \frac{9}{5} = 1.8 $$
+
+\section{FIR: versión 3}
+
+Esta versión utiliza un buffer circular. La ventaja de usar un buffer circular es que no hace falta mover todas las muestras en el buffer sino que agrega la nueva muestra en el lugar en que estaba la muestra mas vieja del buffer y se guarda el indice.
+Para calcular el indice en el buffer circular a medida que evoluciona el tiempo de la se\~nal se utiliza la función \verb|void update_p(int paso);|
+  
+Para esta versión se utilizó la implementación propuesta en la solución. Los resultados obtenidos se pueden ver en la Tabla \ref{table:firv3}
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+ & \verb|Ciclos de reloj| & \verb|Tiempo relativo| & \verb|Eficiencia| \\[0.5ex]
+\hline
+A & 28421  & 1.06\% & 710.5 \\ \hline
+B & 6899895 & 71.98\% & 52.6\\ \hline
+C & 2350776353 & 99.83\% & 52.1\\ \hline
+\end{tabular}
+\caption{Resultados FIRv3}
+\label{table:firv3}
+\end{table}
+
+Desde el punto de vista de la memoria utilizada, esta versión utiliza aproximadamente la misma cantidad de memoria que la versión 2.
+
+En la función \verb|update_p| se realizan 5 sumas y 2 comparaciones en el peor de los casos(que ocurre 1 cada \verb|TAP_LENGTH| veces). Es razonable suponer que la esta función tiene 4 sumas y 2 comparaciones.  
+En la función \verb|fir(sample_t muestra)| se realiza un acceso a memoria, y se realiza \verb|TAP_LENGTH| sumas, \verb|TAP_LENGTH| multiplicaciones y $2 \cdot\verb|TAP_LENGTH|$ accesos a memoria. Ademas se llama a la función \verb|update_p(int paso)| $\verb|TAP_LENGTH|+1$ veces. 
+La cantidad de operaciones es aproximadamente $10 \cdot\verb|TAP_LENGTH|$ por muestra. Esto es coherente con los valores de tiempo obtenidos para las versiones 2 y 3.
+
+Si bien esta implementación dio resultados similares a la versión 2, se observó que la función \verb|update_p| consume gran parte del tiempo de procesamiento. Esto se muestra en la Tabla \ref{table:up}.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+ & \verb|Ciclos de reloj| & \verb|#Ciclos update_p| & \verb|%Tiempo update_p|\\[0.5ex]
+\hline
+B & 6899895 & 2908176 & 30.34\% \\ \hline
+C & 2350776353 & 994543286 & 42.23\% \\ \hline
+\end{tabular}
+\caption{Costo update\_p}
+\label{table:up}
+\end{table}
+
+\section{Optimización}
+
+Se analizaron diferentes maneras de optimizar el filtro FIR versión 3.
+ 
+\subsection{Opciones del compilador de C}	
+Al compilador de C se le puede introducir una bandera para indicarle que se desea optimizar al performance del programa. La bandera para que el compilador optimice el código es \verb|-O|. Hay diferentes niveles de optimización, del 1 al 3, dependiendo cual se elije el compilador habilita o deshabilita banderas, el nivel 3 es el nivel en el que realiza la mayor optimización. La optimización se realiza a costas de tiempo de compilación y de información en debugger. 
+
+Se compiló el con los tres niveles de optimización, los resultados obtenidos se pueden ver en la Tabla \ref{table:optComp}, se utilizó $\verb|TAP_LENGTH|=128$ y $\verb|SIGNAL_LENGTH|=1024$. 
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+ & \verb|-O1| & \verb|-O2| & \verb|-O3| \\[0.5ex]
+\hline
+\verb|Eficiencia| & 27.5  & 13.4 & 13.4 \\ \hline
+\end{tabular}
+\caption{Optimzación compilador}
+\label{table:optComp}
+\end{table}
+
+\subsection{Optimización buffer circular} 
+Aqui se presentan los resultados de diferentes optimizaciones que se realizaron para la función \verb|update_p|.
+
+\subsubsection{Implementación con la operación Módulo}
+Se modificó el código de  la función para que calcule el indice del buffer circular utilizando la función módulo, el código de la función es el siguiente:
+\begin{verbatim}
+void update_p(int paso){
+  if(p!=0){
+    p = (p+paso) % p;
+  }else{
+    p+=paso;
+  }  
+}
+\end{verbatim}
+
+Se puede ver que para esta implementación la cantidad de operaciones es una comparación, una suma y la función módulo. En la implementación original de la función se tenia que la cantidad de operaciones era de 2 comparaciones y 4 sumas. En la Tabla \ref{table:optMod} se pueden ver los resultados obtenidos. 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|update_p| & \verb|update_p_mod|\\[0.5ex]
+\hline
+\verb|#Ciclos update_p| & 2908176 & 2377728 \\  \hline
+\verb|Eficiencia| & 52.6  & 48.6 \\ \hline
+\end{tabular}
+\caption{Optimzación con función módulo}
+\label{table:optMod}
+\end{table}
+
+\subsubsection{Implementación sin parámetro de entrada }
+Como siempre se necesita incrementar en uno el índice del buffer circular, resulta innecesario que la función \verb|update_p| tenga un parámetro de entrada \verb|paso|. La nueva implementación queda:
+\begin{verbatim}
+void update_p(){
+    if (p+1<0){
+        p = TAP_LENGTH + p + 1;
+    } else if (p+1>TAP_LENGTH-1){
+        p = p + 1 - TAP_LENGTH;
+    } else {
+        p = p + 1;
+    }
+}
+\end{verbatim}
+Los resultados obtenidos se muestran en la Tabla \ref{table:optUp}.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|update_p(paso)| & \verb|update_p()|\\[0.5ex]
+\hline
+\verb|#Ciclos update_p| & 2908176 & 2378760 \\  \hline
+\verb|Eficiencia| & 52.6  & 50.6 \\ \hline
+\end{tabular}
+\caption{Optimzación por no parámetro de entrada}
+\label{table:optUp}
+\end{table}
+
+\subsubsection{Función update\_p como \textit{inline}}
+Hacer que una función sea \textit{inline} sirve para decirle al compilador que se quiere que la función sea ejecutada los mas rápido posible. La manera de hacer esto es sustiyendo la llamada a la función, por el código de la mismo. La manera de hacer que una función sea \textit{inline} es escribiendo la etiqueta \verb|inline| antes de la declaración de la función. En la práctica se  tuvieron problemas para realizar esto correctamente, por lo que se muestra parte del código para mostrar la manera en la que funciono según lo esperado. En el archivo \verb|fir.h| se declara la función \verb|update_p| como sigue:
+\begin{verbatim}
+static inline void update_p(int paso);
+\end{verbatim} 
+La etiqueta \textit{static} se utilizó porque la función \verb|update_p| solo se utiliza dentro del módulo \verb|fir|. 
+
+Además se linkeo el programa de la siguiente manera:
+\begin{verbatim}
+gcc -std=c99 -finline-small-functions testfir.o fir.o -o fir_exe
+\end{verbatim}
+La bandera \verb|-finline-small-functions| es necesaria para decirle al compilador que aunque la función sea chica, la trate como \textit{inline}. Sin esta bandera el compilador mira la función y decide no llamarla como \textit{inline}.
+
+Los resultados obtenidos se pueden ver en la Tabla \ref{table:optInl}, se mejora muy poco.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|update_p| & \verb|inline update_p|\\[0.5ex]
+\hline
+\verb|#Ciclos| & 6899895 & 6874128 \\  \hline
+\verb|Eficiencia| & 52.6  & 52.4 \\ \hline
+\end{tabular}
+\caption{Optimzación por inline de update\_p}
+\label{table:optInl}
+\end{table}
+
+\subsubsection{Función update\_p como macro}
+Escribir la función como un macro sirve para intercalar en el programa el código de una función en particular, a diferencia de cuando se llama a una función, que hay que hacer un salto en memoria hasta donde está la función guardada, correr la función y volver a la dirección de memoria en que se estaba antes de llamar a la función. El comportamiento es similar al que se obtiene haciendo que una función sea \textit{inline}. La diferencia es que el macro se procesa en la etapa de precompilación. Cuando se precompila, el compilador mira todas as ocurrencias del macro y sustituye en ese lugar el código que tiene adentro. La ventaja es que el programa no tiene que dar saltos de direcciones para ir a buscar una función en memoria, la desventaja es 	que el programa queda mas grande. 
+
+El macro para la función es:
+\begin{verbatim}
+#define update_p(p){\
+    if (p+1<0){\
+        p = TAP_LENGTH + p + 1;\
+    } else if (p+1>TAP_LENGTH-1){\
+        p = p + 1 - TAP_LENGTH;\
+    } else {\
+        p = p + 1;\
+    }\
+} 
+\end{verbatim} 
+
+Los resultados obtenidos se pueden ver en la Tabla \ref{table:optMacro}, se mejora mas que en el caso en que se usa la función como \textit{inline}, esto lleva a pensar que tal vez la implemtación de la función inline está del todo bien.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|update_p| & \verb|macro update_p|\\[0.5ex]
+\hline
+\verb|#Ciclos| & 6899895 & 532687 \\  \hline
+\verb|Eficiencia| & 52.6  & 40.5 \\ \hline
+\end{tabular}
+\caption{Optimzación por macro de update\_p}
+\label{table:optMacro}
+\end{table}
+
+\subsubsection{Optimizaciones fallidas}
+Se probó optimizar utilizando las variables como \textit{register} sin tener exito. Lo mismo sucedió con utilizar la función \verb|fir| como \textit{inline}. 
+
+\subsection{Filtro optimizado}
+Se combinaron todas las optimizaciones para llegar al filtro optimizado. Se usa el compilador con la bandera de optimización, la función \verb|update_p| se usa como macro, tiene un paso fijo de uno y usa la función módulo.
+\begin{verbatim}
+#define update_p(p){ \
+    if(p!=0){        \
+      p = (p+1) % p; \
+    }else{           \
+      p += 1;        \			     
+    }                \
+} 
+\end{verbatim}
+Se obtiene el siguiente resultado
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c |}
+\hline
+ & \verb|FIR| & \verb|FIR optimizado|\\[0.5ex]
+\hline
+\verb|#Ciclos| & 6899895 & 1749671 \\  \hline
+\verb|Eficiencia| & 52.6  & 13.3 \\ \hline
+\end{tabular}
+\caption{Optimzación por macro de update\_p}
+\label{table:optMacro}
+\end{table}
+
+
+\end{document}
+
+

@@ -1,5 +1,5 @@
-#define TAP_LENGTH 4 // Cantidad de coeficientes del filtro.
-#define SIGNAL_LENGTH 10 // Cantidad de muestras;
+#define TAP_LENGTH 128 // Cantidad de coeficientes del filtro.
+#define SIGNAL_LENGTH 1024 // Cantidad de muestras;
  
 typedef float sample_t;
  

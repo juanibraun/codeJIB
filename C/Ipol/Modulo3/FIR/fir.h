@@ -5,8 +5,8 @@
  * Created on April 3, 2013, 10:58 PM
  */
 
-#define TAP_LENGTH 4
-#define SIGNAL_LENGTH 10
+#define TAP_LENGTH 128
+#define SIGNAL_LENGTH 1024
 
 typedef float sample_t;
 
