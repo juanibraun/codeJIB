@@ -12,7 +12,7 @@ extern int heap_isEmpty(HEAP *h){
 }
 
 extern int heap_isFull(HEAP*h){
-    if(h->index == h->size + 1){
+    if(h->index +1 == h->size){
         return 1;
     }else{
         return 0;

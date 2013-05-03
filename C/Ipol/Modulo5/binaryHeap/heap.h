@@ -27,6 +27,7 @@ extern int heap_addItem(HEAP* h, ITEM* p);
 extern void heap_updateItem(HEAP* h, ITEM *p);
 extern ITEM* heap_extractMin(HEAP* h);
 extern ITEM* heap_queryMin(HEAP* h);
+
 extern ITEM* find_minimum(ITEM* nodes, int n);
 
 static void move_up(HEAP* h, int i);

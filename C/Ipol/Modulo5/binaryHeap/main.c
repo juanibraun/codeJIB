@@ -49,6 +49,10 @@ int main(int argc, char** argv) {
     }
     heap_init(&h,size);
     
+    int estadoHeap;
+    estadoHeap = heap_isEmpty(&h);
+    printf("HEAP VACIO: %d\n", estadoHeap);
+    
     heap_addItem(&h,&datos[3]);
     heap_addItem(&h,&datos[2]);
     heap_addItem(&h,&datos[1]);
@@ -66,6 +70,11 @@ int main(int argc, char** argv) {
     heap_addItem(&h,&datos[12]);
     heap_addItem(&h,&datos[5]);
     
+    estadoHeap = heap_isEmpty(&h);
+    printf("HEAP VACIO: %d\n", estadoHeap);
+    
+    estadoHeap = heap_isFull(&h);
+    printf("HEAP LLENO: %d\n", estadoHeap);
     printHeap(&h);
     
     ITEM* a;
@@ -76,11 +85,23 @@ int main(int argc, char** argv) {
     
     printHeap(&h);
     
+    estadoHeap = heap_isEmpty(&h);
+    printf("HEAP VACIO: %d\n", estadoHeap);
+    
+    estadoHeap = heap_isFull(&h);
+    printf("HEAP LLENO: %d\n", estadoHeap);
+    
     datos[4].value=20;
     
     heap_updateItem(&h,&datos[4]);
     
     printHeap(&h);
+    
+    estadoHeap = heap_isEmpty(&h);
+    printf("HEAP VACIO: %d\n", estadoHeap);
+    
+    estadoHeap = heap_isFull(&h);
+    printf("HEAP LLENO: %d\n", estadoHeap);
     
     
 }
