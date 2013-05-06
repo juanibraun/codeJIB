@@ -23,7 +23,7 @@ int main(int argc, char** argv) {
     printf("arguments: %d\n",argc);
     
     //LEO ENTRADA
-    FILE* inFile = fopen("/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/entradas/entrada2","r" );
+    FILE* inFile = fopen(argv[1],"r" );
     fscanf(inFile,"%d\n", &size);
     
     printf("size= %d\n",size);
@@ -46,11 +46,11 @@ int main(int argc, char** argv) {
     for(i=0;i<size;i++){
         datos[i].value=entrada[i];
     }
-    
+   
     ITEM* min;
     min = find_minimum(datos,size);
     printf("Min = %d\n", min->value);
-    
+ 
     //INICIALIZO HEAP
     heap_init(h,size);
     
@@ -90,6 +90,8 @@ int main(int argc, char** argv) {
       estadoHeap = heap_isFull(h);
       printf("HEAP LLENO: %d\n", estadoHeap);
     }
+    
+    heap_delete(h);
     
 }
 

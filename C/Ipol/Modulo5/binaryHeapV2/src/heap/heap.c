@@ -2,6 +2,7 @@
 #include "heap.h"
 #include <math.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 extern int heap_isEmpty(HEAP *h){
     if (h->index<0){
