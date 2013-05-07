@@ -1,0 +1,2 @@
+/usr/bin/ar cr libHeap.a  CMakeFiles/Heap.dir/heap.o
+/usr/bin/ranlib libHeap.a

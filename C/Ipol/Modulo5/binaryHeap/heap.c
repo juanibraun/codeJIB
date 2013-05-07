@@ -85,6 +85,38 @@ extern ITEM* find_minimum(ITEM* nodes, int n){
   return min;
 }
 
+extern void sort(ITEM* nodes,int n){
+    int i;
+    ITEM* aux1, aux2;
+    for(i=0;i,n;i++){
+        aux1 = find_minimum(nodes, n-i);
+        aux2 = nodes[i];
+        nodes++; 
+        nodes = aux1;
+    }
+}
+
+extern void build_heap_lin(HEAP* h, ITEM* nodes,int n){
+    int i;
+    h->size = n;
+    h->index = n-1;
+    
+    for(i=0;i<n;i++){
+        h->data[i]= nodes+i;
+    }
+    for(i = floor((n-1)/2); i>=0; i--){
+        move_down(h,i);
+    } 
+        
+}
+
+extern void build_heap(HEAP* h, ITEM* nodes,int n){
+    int i;
+    h->size = n;
+    for(i=0;i<n;i++)
+        heap_addItem(h, nodes + i);
+}
+
 void move_up(HEAP* h, int i){
     int p = parent(i);
     
@@ -141,13 +173,15 @@ int parent(int i){
 void printHeap(HEAP* h){
   int i,j,k;
   k=0;
+  ITEM* aux;
     printf("\n============HEAP============\n");
     for(i=0;i<=log2(h->size);i++){
       for(j=0;j<pow(2,i);j++){
           if(k>h->index){
                 printf("%s ","X");    
           }else{
-                printf("%d ",h->data[k]->value);
+               aux = h->data[k]; 
+               printf("%d ",aux->value);
 	  }
           k++;
       }

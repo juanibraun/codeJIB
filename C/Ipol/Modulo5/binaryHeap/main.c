@@ -19,11 +19,12 @@ int main(int argc, char** argv) {
     int size,aux;
     int estadoHeap;
     HEAP* h;
+    ITEM* datos;
     h = (HEAP*)malloc(sizeof(HEAP));
     printf("arguments: %d\n",argc);
     
     //LEO ENTRADA
-    FILE* inFile = fopen("/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/entradas/entrada2","r" );
+    FILE* inFile = fopen("/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/entradas/entrada1","r" );
     fscanf(inFile,"%d\n", &size);
     
     printf("size= %d\n",size);
@@ -42,10 +43,17 @@ int main(int argc, char** argv) {
     
     
     //GUARDO ENTRADA EN ARRAY DE ITEMS
-    ITEM datos[size];
+    datos = (ITEM*)malloc(size*sizeof(ITEM));
     for(i=0;i<size;i++){
         datos[i].value=entrada[i];
+        datos[i].label = i;
     }
+    
+    sort(datos,size);
+   
+    printf("Entrada\n");
+    for(i=0;i<size;i++)
+        printf("%d\n",datos[i].value);
     
     ITEM* min;
     min = find_minimum(datos,size);
@@ -59,9 +67,11 @@ int main(int argc, char** argv) {
     printf("HEAP VACIO: %d\n", estadoHeap);
     
     //LLENO HEAP
-    for(i=0;i<size;i++)
-      heap_addItem(h,&datos[i]);
-   
+//    build_heap(h,datos,size);
+    build_heap_lin(h,datos,size);
+    
+    
+    
     //VUELVO A CHEQUEAR ESTADO HEAP
     estadoHeap = heap_isEmpty(h);
     printf("HEAP VACIO: %d\n", estadoHeap);

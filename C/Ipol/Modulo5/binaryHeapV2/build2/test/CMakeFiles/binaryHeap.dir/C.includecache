@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/src/test/../heap/heap.h
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/src/test/main.c
+stdio.h
+-
+stdlib.h
+-
+math.h
+-
+heap.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/src/test/heap.h
+

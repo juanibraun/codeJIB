@@ -1,0 +1,1 @@
+/usr/bin/gcc  -std=c99 -pedantic-errors -Wall -Wextra -Werror -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/binaryHeap.dir/main.o  -o binaryHeap  ../heap/libHeap.a 

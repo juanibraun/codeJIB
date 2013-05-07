@@ -1,0 +1,3 @@
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/build2/heap/CMakeFiles/Heap.dir
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/build2/test/CMakeFiles/Input.dir
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo5/binaryHeapV2/build2/test/CMakeFiles/binaryHeap.dir

@@ -64,7 +64,6 @@ extern ITEM* heap_extractMin(HEAP* h){
     ITEM* aux;
     aux = heap_queryMin(h);
     swap(h, 0, h->index);
-//    printHeap(h);
     h->index -= 1;
     move_down(h, 0);
     return aux;
@@ -84,6 +83,27 @@ extern ITEM* find_minimum(ITEM* nodes, int n){
             min = aux;
     }
   return min;
+}
+
+extern void build_heap_lin(HEAP* h, ITEM* nodes,int n){
+    int i;
+    h->size = n;
+    h->index = n-1;
+    
+    for(i=0;i<n;i++){
+        h->data[i]= nodes+i;
+    }
+    for(i = floor((n-1)/2); i>=0; i--){
+        move_down(h,i);
+    } 
+        
+}
+
+extern void build_heap(HEAP* h, ITEM* nodes,int n){
+    int i;
+    h->size = n;
+    for(i=0;i<n;i++)
+        heap_addItem(h, nodes + i);
 }
 
 void move_up(HEAP* h, int i){
@@ -110,7 +130,6 @@ void move_down(HEAP* h, int i){
     }
     if (min != i){
         swap(h, i, min);
-//        printHeap(h);
         move_down(h,min);    
     }
 }

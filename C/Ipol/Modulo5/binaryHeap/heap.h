@@ -29,8 +29,14 @@ extern ITEM* heap_extractMin(HEAP* h);
 extern ITEM* heap_queryMin(HEAP* h);
 
 extern ITEM* find_minimum(ITEM* nodes, int n);
+extern void sort(ITEM* nodes,int n);
+
+extern void build_heap_lin(HEAP* h, ITEM* nodes,int n);
+extern void build_heap(HEAP* h, ITEM* nodes,int n);
 
 static void move_up(HEAP* h, int i);
 static void move_down(HEAP* h, int i);
 static void swap(HEAP* h, int i, int j);
 static int left(int i), right(int i), parent(int i);
+
+void printHeap(HEAP* h);
