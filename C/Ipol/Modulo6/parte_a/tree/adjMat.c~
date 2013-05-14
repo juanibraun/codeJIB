@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main(int argc, char** argv) {
+
+  int size = atoi(argv[1]);
+  int i;
+  int j;
+    
+  printf("arguments: %d\n",argc);
+  printf("size = %d\n",size);
+
+  
+  FILE* inFile = fopen(argv[2],"w" );
+  fprintf(inFile,"%d\n", size);
+  
+  for(i=0;i<size;i++){
+      for(j=0;j<size;j++){
+          fprintf(inFile,"%d ",rand()%2); 
+      }
+      fprintf(inFile,"\n");
+  }
+    
+
+  fclose(inFile);
+      
+}
