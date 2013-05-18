@@ -1,7 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+/*
+Funcion que genera matrices de adyacencia
 
+se llama como:
+
+./adjMat 7 1 ./entrada0
+
+el primer argumento es el tamano de la matriz
+el segundo es una bandera para hacer que la matriz sea simetrica(1 simetrica, 0 no simetrica)
+el tercero es el archivo a escribir
+
+*/
 int main(int argc, char** argv) {
 
   int size = atoi(argv[1]);

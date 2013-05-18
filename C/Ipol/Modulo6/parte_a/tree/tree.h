@@ -17,6 +17,7 @@ struct _node
 	struct _node* parent;
 	struct _node* first_child;
 	struct _node* next_sibling;
+        int visited;
 };
 
 typedef struct _node node;

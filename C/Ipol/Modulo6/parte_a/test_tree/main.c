@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../tree/tree.h"
+
 
 /*
  * 
@@ -60,15 +60,6 @@ int main(int argc, char** argv) {
         printf("%d ",hist[i]);
     printf("\n");
     
-    
-    
-    
-    
-    
-//    tree* arbol;
-//    
-//    read_tree(argv[1], arbol);
-//    tree_print(arbol);
-//    tree_print_dot(arbol);
+   
 }
 

@@ -26,6 +26,7 @@ void read_tree(const char* filename, tree* t){
 		t->nodes[i].parent=NULL;
 		t->nodes[i].next_sibling=NULL;
 		t->nodes[i].first_child=NULL;
+                t->nodes[i].visited=0;
 	}
 
 	int idx_root;
