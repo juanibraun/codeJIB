@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/test_tree/main.c
+stdio.h
+-
+stdlib.h
+-
+

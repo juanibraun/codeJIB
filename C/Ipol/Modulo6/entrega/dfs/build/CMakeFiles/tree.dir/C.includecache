@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.c
+tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.h
+stdio.h
+-
+errno.h
+-
+stdlib.h
+-
+string.h
+-
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.h
+

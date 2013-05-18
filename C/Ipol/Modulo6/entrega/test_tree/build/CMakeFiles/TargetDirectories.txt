@@ -1,0 +1,2 @@
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/test_tree/build/CMakeFiles/adjMat.dir
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/test_tree/build/CMakeFiles/test_tree.dir

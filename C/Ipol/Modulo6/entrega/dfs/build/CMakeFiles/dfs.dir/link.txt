@@ -1,0 +1,2 @@
+/usr/bin/ar cr libdfs.a  CMakeFiles/dfs.dir/bfs.c.o
+/usr/bin/ranlib libdfs.a
