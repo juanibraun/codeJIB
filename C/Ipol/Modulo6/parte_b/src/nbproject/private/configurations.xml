@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="88">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="src">
+      <in>bfs.c</in>
+      <in>bfs.h</in>
+      <in>dijkstra.c</in>
+      <in>dijkstra.h</in>
+      <in>heap.c</in>
+      <in>heap.h</in>
+      <in>main.c</in>
+      <in>tree.c</in>
+      <in>tree.h</in>
+    </df>
+  </logicalFolder>
+  <projectmakefile>build/Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>4</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" \</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/grafos_dijkstra/matriu_dijkstra_1.txt </runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/grafos_dijkstra/matriu_dijkstra_1.txt</runcommand>
+        <rundir>/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/build</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
