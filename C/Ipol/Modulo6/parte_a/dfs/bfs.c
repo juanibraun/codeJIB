@@ -5,7 +5,7 @@
 void dfs_rec(tree* t, node* n){
     
     if(n->first_child==NULL){
-      //printf("%d\n",n->id);
+      printf("%d\n",n->id);
     }else{
         n=n->first_child;
         dfs_rec(t,n);  
@@ -14,12 +14,12 @@ void dfs_rec(tree* t, node* n){
               dfs_rec(t,n);             
         }
         n = n->parent;
-        //printf("%d\n",n->id);
+        printf("%d\n",n->id);
     }    
 }
 
 void dfs_it(tree* t, node* n) {
-  //int i;
+    int i;
     int k;
     int r;
     k = t->n;
@@ -46,8 +46,8 @@ void dfs_it(tree* t, node* n) {
         }
                 
     }
-    //for(i=0;i<k;i++)
-    // printf("%d\n", closed[i]->id);
+    for(i=0;i<k;i++)
+     printf("%d\n", closed[i]->id);
         
    
 }

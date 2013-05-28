@@ -16,11 +16,10 @@ int main(int argc, char** argv) {
 
     
     int size;
-    int aux;
     //LEO ENTRADA
     FILE* inFile = fopen(argv[1],"r" );
     fscanf(inFile,"%d\n", &size);
-    
+    printf("args: %d\n", argc);
     printf("size= %d\n",size);
     
     int entrada[size*size];
@@ -34,7 +33,7 @@ int main(int argc, char** argv) {
            fscanf(inFile,"%d ",&entrada[j+size*i]); 
            grado[i] += entrada[j+size*i];
         }
-        fscanf(inFile,"\n",&aux);    
+        fscanf(inFile,"\n");    
     }
     
     for(i=0;i<size;i++){

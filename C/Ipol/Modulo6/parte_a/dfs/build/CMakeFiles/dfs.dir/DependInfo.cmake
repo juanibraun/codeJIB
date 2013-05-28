@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/bfs.c" "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/dfs.dir/bfs.c.o"
+  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.c" "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/dfs.dir/bfs.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

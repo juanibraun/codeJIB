@@ -4,14 +4,14 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/main.c" "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/dfs_test.dir/main.c.o"
+  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/main.c" "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/dfs_test.dir/main.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
-  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/dfs.dir/DependInfo.cmake"
-  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/tree.dir/DependInfo.cmake"
+  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/dfs.dir/DependInfo.cmake"
+  "/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/tree.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

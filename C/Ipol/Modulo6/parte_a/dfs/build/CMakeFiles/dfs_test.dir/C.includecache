@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/bfs.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.h
 tree.h
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/tree.h
 
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/main.c
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/main.c
 stdio.h
 -
 stdlib.h
 -
 tree.h
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/tree.h
 bfs.h
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/bfs.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.h
 
-/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/tree.h
 

@@ -39,10 +39,10 @@ RM = /opt/local/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs
+CMAKE_SOURCE_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build
+CMAKE_BINARY_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

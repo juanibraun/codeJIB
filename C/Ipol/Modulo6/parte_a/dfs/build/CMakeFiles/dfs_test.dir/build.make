@@ -35,10 +35,10 @@ RM = /opt/local/bin/cmake -E remove -f
 CMAKE_EDIT_COMMAND = /opt/local/bin/ccmake
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs
+CMAKE_SOURCE_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build
+CMAKE_BINARY_DIR = /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/dfs_test.dir/depend.make
@@ -51,17 +51,17 @@ include CMakeFiles/dfs_test.dir/flags.make
 
 CMakeFiles/dfs_test.dir/main.c.o: CMakeFiles/dfs_test.dir/flags.make
 CMakeFiles/dfs_test.dir/main.c.o: ../main.c
-	$(CMAKE_COMMAND) -E cmake_progress_report /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object CMakeFiles/dfs_test.dir/main.c.o"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dfs_test.dir/main.c.o   -c /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/main.c
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -o CMakeFiles/dfs_test.dir/main.c.o   -c /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/main.c
 
 CMakeFiles/dfs_test.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/dfs_test.dir/main.c.i"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/main.c > CMakeFiles/dfs_test.dir/main.c.i
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -E /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/main.c > CMakeFiles/dfs_test.dir/main.c.i
 
 CMakeFiles/dfs_test.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/dfs_test.dir/main.c.s"
-	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/main.c -o CMakeFiles/dfs_test.dir/main.c.s
+	/usr/bin/gcc  $(C_DEFINES) $(C_FLAGS) -S /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/main.c -o CMakeFiles/dfs_test.dir/main.c.s
 
 CMakeFiles/dfs_test.dir/main.c.o.requires:
 .PHONY : CMakeFiles/dfs_test.dir/main.c.o.requires
@@ -99,6 +99,6 @@ CMakeFiles/dfs_test.dir/clean:
 .PHONY : CMakeFiles/dfs_test.dir/clean
 
 CMakeFiles/dfs_test.dir/depend:
-	cd /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/entrega/dfs/build/CMakeFiles/dfs_test.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/build/CMakeFiles/dfs_test.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/dfs_test.dir/depend
 
