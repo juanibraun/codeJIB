@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.c
+bfs.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.h
+stdio.h
+-
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/bfs.h
+tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/tree.h
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_a/entrega/dfs/tree.h
+
