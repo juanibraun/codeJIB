@@ -1,0 +1,87 @@
+//#include "graf_utils.h"
+#include "tree.h"
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <string.h>
+
+void read_tree(const char* filename, tree* t){
+        int i;
+	FILE *fid = fopen(filename, "r");
+	if (!fid){
+                printf("can't open \"%s\" (%s)",filename, strerror(errno));
+		exit(1);
+	}
+	int n;
+	int r = fscanf(fid, "%d\n", &n);
+	if ((r != 1) || (n <= 0)){
+                printf("the file \"%s\" has a wrong format", filename);
+                exit(1);
+        }
+	t->n=n;
+	t->nodes=malloc(n*sizeof(*(t->nodes)));
+         
+	for(i=0;i<t->n;i++){
+		t->nodes[i].id=i;
+		t->nodes[i].parent=NULL;
+		t->nodes[i].next_sibling=NULL;
+		t->nodes[i].first_child=NULL;
+	}
+
+	int idx_root;
+	fscanf(fid, "%d\n", &idx_root);
+	t->root=t->nodes+idx_root;
+
+	for(i=0;i<t->n;i++){
+		int idx = -1;
+		fscanf(fid, "%d\n", &idx);
+		printf("%d %d\n", i, idx);
+		if (idx < 2147483647){
+			node* parent = t->nodes + 1;
+			t->nodes[i].parent = parent;
+			if (parent->first_child == NULL){
+				parent->first_child = t->nodes + i;
+			}else{
+                                node *aux = parent->first_child;
+				while (aux->next_sibling != NULL){
+					aux = aux->next_sibling;
+				}
+				aux->next_sibling = t->nodes + i;
+			}
+		}
+	}
+
+}
+
+#define ION(t,n) n-t->nodes
+
+void tree_print(tree* t){
+        int i;
+	for(i=0;i<t->n;i++){
+		node* n=t->nodes+i;
+		int idx_s=-1;
+		if (n->next_sibling)
+			idx_s=ION(t,n->next_sibling);
+		int idx_p=-1;
+		if (n->parent)
+			idx_p=ION(t,n->parent);
+		printf("n: %d p: %d s: %d\n",i,idx_p,idx_s);
+	}
+
+}
+
+void tree_print_dot(tree* t){
+        int i;
+	printf("digraph tree{\n");
+	for(i=0;i<t->n;i++){
+		node* n=t->nodes+i;
+		int idx_p=-1;
+		if (n->parent)
+			idx_p=ION(t,n->parent);
+		if(idx_p>=0)
+			printf("%d -> %d\n",idx_p,i);
+	}
+	printf("}\n");
+}
+
+

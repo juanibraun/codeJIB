@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/dijkstra.c
+dijkstra.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/dijkstra.h
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/dijkstra.h
+heap.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/heap.h
+stdlib.h
+-
+
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/heap.h
+tree.h
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/src/tree.h
+

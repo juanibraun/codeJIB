@@ -1,0 +1,1 @@
+/usr/bin/gcc  -std=c99 -g -pedantic-errors -Wall -Wextra -Werror -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/dijkstra_test.dir/main.c.o  -o dijkstra_test  libheap.a libdijkstra.a 

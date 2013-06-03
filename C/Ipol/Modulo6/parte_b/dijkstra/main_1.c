@@ -2,13 +2,14 @@
  * File:   main.c
  * Author: juanignaciobraun
  *
- * Created on May 28, 2013, 8:51 PM
+ * Created on May 13, 2013, 7:28 PM
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "bfs.h"
 #include "dijkstra.h"
-
+#include "tree.h"
 
 
 int main(int argc, char** argv) {
@@ -17,8 +18,6 @@ int main(int argc, char** argv) {
     int h;
     int w;
     h = argc;
-    char Start,Finish;
-    int start,finish;
     //LEO ENTRADA
     FILE* inFile = fopen(argv[1],"r" );
     fscanf(inFile,"%d %d\n", &h, &w);
@@ -41,26 +40,20 @@ int main(int argc, char** argv) {
         printf("\n");    
     }
    
-    fclose(inFile);
+    tree* t;
+    t->n = h;
+    t->nodes=malloc(h*sizeof(*(t->nodes)));
+         
+    for(i=0;i<t->n;i++){
+		t->nodes[i].id=i;
+		t->nodes[i].parent=NULL;
+		t->nodes[i].next_sibling=NULL;
+		t->nodes[i].first_child=NULL;
+    }
+            
+    dijkstra(t, nodos, costos);
     
-    Start = getc(stdin);
-    Finish = getc(stdin);
-    start = Start - 65;
-    finish = Finish - 65;
-    
-    HEAP* t;
-    t = (HEAP*)malloc(sizeof(HEAP)); 
-    heap_init(t,h);
-    ITEM nodos[h];
-    
-    dijkstra(t, nodos, start, finish, costos);
-    heap_delete(t);
-    dijkstra2(h, nodos, start, finish, costos);
     
     
 }
-
-
-
-
 

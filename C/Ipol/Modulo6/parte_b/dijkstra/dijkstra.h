@@ -1,6 +1,6 @@
+#include "tree.h"
 #include "heap.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void init_source(ITEM* G, int s, int size);
 

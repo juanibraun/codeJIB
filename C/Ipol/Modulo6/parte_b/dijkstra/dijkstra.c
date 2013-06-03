@@ -32,6 +32,7 @@ void dijkstra(HEAP* G, ITEM* g, int start, int finish, int* costs){
     ITEM pred[size];
     ITEM path[size];
     ITEM* u;
+    ITEM *v;
     int i = 0;
     int j,w;
     int k = 1;

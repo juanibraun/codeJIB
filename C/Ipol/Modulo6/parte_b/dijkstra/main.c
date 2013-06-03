@@ -7,8 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "bfs.h"
 #include "dijkstra.h"
-
+#include "tree.h"
 
 
 int main(int argc, char** argv) {

@@ -1,0 +1,2 @@
+/usr/bin/ar cr libdijkstra.a  CMakeFiles/dijkstra.dir/dijkstra.c.o
+/usr/bin/ranlib libdijkstra.a

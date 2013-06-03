@@ -1,0 +1,3 @@
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/build/CMakeFiles/dijkstra.dir
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/build/CMakeFiles/dijkstra_test.dir
+/Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/build/CMakeFiles/heap.dir

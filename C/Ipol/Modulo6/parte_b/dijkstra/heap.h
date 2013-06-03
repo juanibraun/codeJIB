@@ -4,6 +4,9 @@
  *
  * Created on April 30, 2013, 8:42 PM
  */
+#include "tree.h"
+
+
 typedef struct{
   int label;
   int value;
