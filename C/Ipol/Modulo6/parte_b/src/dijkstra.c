@@ -77,7 +77,7 @@ void dijkstra(HEAP* G, ITEM* g, int start, int finish, int* costs){
    }
    printf("CAMINO\n");
    for(j=k-1;j>=0;j--)
-        printf("id: %c\t cost: %d\n",path[j].id+65,path[j].value);
+        printf("id: %d\t cost: %d\n",path[j].id,path[j].value);
 }
 
 void dijkstra2(int size, ITEM* g, int start, int finish, int* costs){
@@ -151,5 +151,5 @@ void dijkstra2(int size, ITEM* g, int start, int finish, int* costs){
    }
    printf("CAMINO\n");
    for(j=k-1;j>=0;j--)
-        printf("id: %c\t cost: %d\n",path[j].id+65,path[j].value);
+        printf("id: %d\t cost: %d\n",path[j].id,path[j].value);
 }

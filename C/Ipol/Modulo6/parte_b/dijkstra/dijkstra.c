@@ -52,7 +52,7 @@ void dijkstra(HEAP* G, ITEM* g, int start, int finish, int* costs){
         i++;
         for(j=0;j<G->size;j++){
             w = costs[size*(u->id)+j];
-            if(w<INF){
+            if(w<INF || w==0){
                  if(g[j].value > u->value + w){
                          g[j].value = u->value + w; 
                          move_up(G,g[j].label);
@@ -65,9 +65,13 @@ void dijkstra(HEAP* G, ITEM* g, int start, int finish, int* costs){
             }       
         }    
     }
-//   printf("\nCAMINO\n");
-//   for(j=0;j<G->size;j++)
-//        printf("id: %c\t cost: %d\n",pred[j].id+65,pred[j].value);
+   printf("\nCostos\n");
+   for(j=0;j<size;j++)
+        printf("id: %c\t cost: %d\n",S[j].id+65,S[j].value);
+   
+   printf("\nPrevios\n");
+   for(j=0;j<size;j++)
+        printf("id: %c\t cost: %d\n",pred[j].id+65,pred[j].value);
    
    path[0] = g[finish];
    i = finish;
@@ -152,5 +156,5 @@ void dijkstra2(int size, ITEM* g, int start, int finish, int* costs){
    }
    printf("CAMINO\n");
    for(j=k-1;j>=0;j--)
-        printf("id: %c\t cost: %d\n",path[j].id+65,path[j].value);
+        printf("id: %d\t cost: %d\n",path[j].id+65,path[j].value);
 }

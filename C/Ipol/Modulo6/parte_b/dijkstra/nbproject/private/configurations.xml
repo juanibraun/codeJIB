@@ -25,6 +25,7 @@
       <runprofile version="9">
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/grafos_dijkstra/k1000.txt</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/grafos_dijkstra/matriu_dijkstra_1.txt</runcommandpicklistitem>
         </runcommandpicklist>
         <runcommand>"${OUTPUT_PATH}" /Users/juanignaciobraun/codeJIB/C/Ipol/Modulo6/parte_b/grafos_dijkstra/matriu_dijkstra_1.txt</runcommand>

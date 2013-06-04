@@ -17,7 +17,9 @@ int main(int argc, char** argv) {
     int h;
     int w;
     h = argc;
-    char Start,Finish;
+    size_t nbytes = 5;
+    char* Start = (char *) malloc (nbytes + 1);
+    char* Finish = (char *) malloc (nbytes + 1);
     int start,finish;
     //LEO ENTRADA
     FILE* inFile = fopen(argv[1],"r" );
@@ -34,19 +36,21 @@ int main(int argc, char** argv) {
         fscanf(inFile,"\n");    
     }
     
+    /*
     for(i=0;i<h;i++){
         for(j=0;j<w;j++){
            printf("%d ",costos[j+w*i]); 
         }
         printf("\n");    
     }
-   
+    */
+
     fclose(inFile);
     
-    Start = getc(stdin);
-    Finish = getc(stdin);
-    start = Start - 65;
-    finish = Finish - 65;
+    getline(&Start,&nbytes,stdin);
+    getline(&Finish,&nbytes,stdin);
+    start = atoi(Start);
+    finish = atoi(Finish);
     
     HEAP* t;
     t = (HEAP*)malloc(sizeof(HEAP)); 

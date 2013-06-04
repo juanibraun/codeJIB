@@ -7,7 +7,7 @@
 typedef struct{
   int label;
   int value;
-  char id;  
+  int id;  
 } ITEM;
 
 typedef struct{
