@@ -46,10 +46,10 @@
 
 El objetivo de este informe es comentar los resultados obtenidos para las diferentes versiones del algorimto de Dijkstra implementadas. 
 El algoritmo de Dijkstra es un algoritmo de búsqueda en grafos. Dado un grafo $G = (E,V)$ donde $E$ son aristas con costos asociados y $V$ los vértices, el algoritmo calcula los caminos de menor costo desde un vértice inicial $s \in V$ hasta todos los demás vértices $v \in V-\lbrace s \rbrace$.   
-
 A continuación se muestra el pseudo-código del algoritmo para el caso en que se usa la cola de prioridad. 
 \begin{verbatim}
 
+dijkstra(G,s)
 dist[s] = 0;  (distancia al vertice inicial)
 for (todos los demas vertices)
    dist[v] = inf; (Las distancias a los nodos desconocidos es infinita)
@@ -73,7 +73,7 @@ while (Q no vacio)'
 return dist
 \end{verbatim}
 
-El caso en el que no se usa la cola de prioridad es muy similar, la diferencia esta en que cada vez que se quiere conseguir el siguiente de menor costo se oredena el arreglo con N recorridas.
+El caso en el que no se usa la cola de prioridad es muy similar, la diferencia esta en que cada vez que se quiere conseguir el siguiente nodo de menor costo se ordena el arreglo nuevamente el arreglo.
 
 El pseudo-código que se muestra sirve para calcular los menores costos de un nodo inicial hacía todos los demás, lo que se necesita en este caso es encontrar el camino de menor costo entre dos nodos dados. 
 
@@ -103,8 +103,9 @@ A partir del Cuadro \ref{table:Prev} se puede calcular el menor camino de $A$ a 
     \label{fig1}
 \end{figure}
 
-La 
+La complejidad teórica del algoritmo depende de que versión se utilice. Si se utiliza la versión con \textit{heap} se tiene que la complejidad esperada es de $O(E+V^2)$. En el caso particular en que el grafo tiene pocas aristas, $E=o(V^2\/log(V))$, la complejidad del algoritmo baja a $O((V+E)\log(V))$.
 
+En el caso en que no se utiliza el \textit{min heap} la complejidad del algoritmo sube a $O(V^3)$ ya que esta versión ordena $V$ veces el array de nodos y la función \verb|sort| que ordena es $O(V^2)$.
 
 \section{Resultados}
 Se midieron los ciclos de reloj para diferentes entradas. Los resultados obtenidos se muestran el Cuadro \ref{table:res}.
@@ -125,9 +126,31 @@ E7 & 750 & 21 601 507 & 4 652 164 219\\ \hline
 E8 & 1000 & 37 042 054 & 10 718 859 780\\ \hline
 
 
+
 \end{tabular}
 \caption{Resultados}
 \label{table:res}
+\end{table}
+
+La matrices de adyacencia que se utilizaron para obtener los resultados del Cuadro \ref{table:res}, fueron matrices densas.En todos los casos requiere menos ciclos la versión que utiliza el \textit{min heap}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+  & \# relacion teorica & \# relacion obtenida\\[0.5ex]
+\hline
+E3/E2 & 2.25 & 1.81\\ \hline
+E4/E3 & 1.78 & 1.92\\ \hline
+E5/E4 & 6.25 & 5.04\\ \hline
+E6/E5 & 4 & 3.66\\ \hline
+E7/E6 & 2.25 & 2.17\\ \hline
+E8/E7 & 1.78 & 1.71 \\ \hline
+
+
+\end{tabular}
+\caption{Comparación resultados implementación con heap }
+\label{table:resCompH}
 \end{table}
 
 \begin{table}[h!]
@@ -136,19 +159,107 @@ E8 & 1000 & 37 042 054 & 10 718 859 780\\ \hline
 \hline
   & \# relacion teorica & \# relacion obtenida\\[0.5ex]
 \hline
-E3/E2 & 8 & 21 260 & 198 015\\ \hline
-E4/E3 & 1.4 1.8\\ \hline
-E5/E4 & 2.94 & 5.04\\ \hline
-E6/E5 & 2.22 & 3.66\\ \hline
-E7/E6 & 1.59 & 2.17\\ \hline
-E8/E7 & 1.39 & 1.71 \\ \hline
+E3/E2 & 3.375 & 2.67\\ \hline
+E4/E3 & 2.37 & 2.29\\ \hline
+E5/E4 & 15.6 & 11.45\\ \hline
+E6/E5 & 8 & 7.05\\ \hline
+E7/E6 & 3.375 & 3.22\\ \hline
+E8/E7 & 2.37 & 2.3 \\ \hline
 
 
 \end{tabular}
-\caption{Resultados}
-\label{table:res}
+\caption{Comparación resultados implementación sin heap }
+\label{table:resCompSH}
 \end{table}
 
+En los Cuadros \ref{table:resCompH} y \ref{table:resCompSH} se puede ver la comparación entre los resultados obtenidos y los resultados esperados para cada caso. También se pude ver gráficamente en las Figuras \ref{fig2} y \ref{fig3}. Si bien difieren entre si, es razonable considerar que los resultados obtenidos son coeherentes con la complejidad teorica del algoritmo.
+
+\begin{figure}[ht]
+\centering
+\subfigure[Comparación implementación con min-heap]{
+	\includegraphics[width=0.6\textwidth]{fig2}
+	\label{fig2}
+}
+\subfigure[Comparación implementación sin min-heap]{
+	\includegraphics[width=0.6\textwidth]{fig1}
+	\label{fig3}
+}
+\caption{Comparaciones de los resultados esperados y los obtenidos}
+
+\end{figure}
+
+\begin{comment}
+\begin{figure}[h!] 
+ \centering
+    \includegraphics[scale=0.1]{fig2}
+    \caption{Comparación implementación con min-heap}
+    \label{fig2}
+\end{figure}
+
+\begin{figure}[h!] 
+ \centering
+    \includegraphics[scale=0.1]{fig1}
+    \caption{Comparación implementación sin min-heap}
+    \label{fig3}
+\end{figure}
+\end{comment}
+
+
+
+Se utilizaron matrices de adyacencia esparzas con una densidad de 40 \%. Los resultados obtenidos se muestran en el Cuadro \ref{table:res2} 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+ & \# nodos & \# ciclos con heap & \# ciclos sin heap\\[0.5ex]
+\hline
+E1 & 8 & 19 247 & 181 410\\ \hline
+E2 & 50 & 126 910 & 3 001 624\\ \hline
+E3 & 75 & 248 509 & 7 990 348\\ \hline
+E4 & 100 & 413 025& 16 694 398\\ \hline
+E5 & 250 & 2 327 314 & 196 689 026\\ \hline
+E6 & 500 & 9 012 278 & 1 411 192 186 \\ \hline
+E7 & 750 & 20 078 698 & 4 581 173 954\\ \hline
+E8 & 1000 & 35 513 522 & 10 644 106 747\\ \hline
+
+
+
+\end{tabular}
+\caption{Resultados para matriz esparza con densidad 40 \%}
+\label{table:res2}
+\end{table}
+
+Se observó que los la cantidad de ciclos no bajó demasiado para la versión que utiliza \textit{min-heap}, además las relaciones obtenidas para los valores teóricos y lo obtenidos no son coherentes con lo esperado. La relación teórica se calculó como 
+$$
+(V_x+E_x)\log(V_x)/(V_y+E_y)\log(V_y) = (1.4) \dot V_x \log(V_x) / (1.4) \dot V_y\log(V_y)
+$$
+donde $V_x$ y $V_y$ son la cantidad de nodos de las entradas utilizadas.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{| l | c | c | c |}
+\hline
+  & \# relacion teorica & \# relacion obtenida\\[0.5ex]
+\hline
+E3/E2 & 1.65 & 1.95\\ \hline
+E4/E3 & 1.42 & 1.66\\ \hline
+E5/E4 & 2.99 & 5.6\\ \hline
+E6/E5 & 2.25 & 3.87\\ \hline
+E7/E6 & 1.6 & 2..22\\ \hline
+E8/E7 & 1.39 & 1.76 \\ \hline
+
+
+\end{tabular}
+\caption{Comparación resultados implementación con heap para matriz con densidad 40 \% }
+\label{table:resCompH}
+\end{table}
+
+\section{Conclusiones}
+
+Se implementaron dos versiones de la algoritmo de Dijkstra, una que utiliza una cola de prioridad y otra que no. Para todas las pruebas realizadas funcionó mejor la versión que utiliza la cola de prioridad. 
+
+Se vio que los resultados obtenidos para matrices densas fueron de acuerdo a lo esperado. Para el caso en que la matriz es esparza, el algoritmo no se comportó como se esperaba. Se hicieron pruebas con diferentes valores de densidad de la matriz de adyacencia y los resultados fueron similares. 
 
 \end{document}
 
